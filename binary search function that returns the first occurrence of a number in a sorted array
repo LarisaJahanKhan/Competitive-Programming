@@ -14,9 +14,9 @@ int bsearch(int arr[], int low, int high, int x) {
         return bsearch(arr, mid + 1, high, x);
     } else {
         if (mid == 0 || arr[mid - 1] != x) {
-            return mid;  // First occurrence
+            return mid;  
         } else {
-            return bsearch(arr, low, mid - 1, x);  // Search left part
+            return bsearch(arr, low, mid - 1, x);  
         }
     }
 }
