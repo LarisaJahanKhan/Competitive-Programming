@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+int bsearch(int arr[], int low, int high, int x) {
+    if (low > high) {
+        return -1;
+    }
+
+    int mid = (low + high) / 2;
+
+    if (x < arr[mid]) {
+        return bsearch(arr, low, mid - 1, x);
+    } else if (x > arr[mid]) {
+        return bsearch(arr, mid + 1, high, x);
+    } else {
+        if (mid == 0 || arr[mid - 1] != x) {
+            return mid;  // First occurrence
+        } else {
+            return bsearch(arr, low, mid - 1, x);  // Search left part
+        }
+    }
+}
+
+int main() {
+    int m, y;
+    cin >> m;
+    int arr1[m];
+    for (int i = 0; i < m; i++) {
+        cin >> arr1[i];
+    }
+    cin >> y;
+
+    int index = bsearch(arr1, 0, m - 1, y);
+    cout << index;
+
+    return 0;
+}
