@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+int sqrRootFloor(int x)
+{
+    int low=1, high=x; 
+    int ans=-1;
+    while(low<=high)
+    {
+        int mid=(low+high)/2;
+        int mSquare=mid*mid;
+        if(mSquare==x)
+        {
+            return mid;
+        }
+        else if(mSquare>x)
+        {
+            high=mid-1;
+        }
+        else
+        {
+            low=mid+1;
+            ans=mid;
+        }
+    }
+    return ans;
+}
+int main()
+{
+    int y;
+    cin>>y;
+    int squareRoot=sqrRootFloor(y);
+    cout<<squareRoot<<endl;
+}
