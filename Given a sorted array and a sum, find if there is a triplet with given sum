@@ -1,0 +1,50 @@
+#include<iostream>
+using namespace std;
+bool ispair(int arr[], int n, int x)
+{
+    int left=0, right=n-1;
+    while(left<right)
+    {
+        if(arr[left]+ arr[right]==x)
+    {
+        return true;
+    }
+    else if(arr[left]+ arr[right]>x)
+    {
+        right=right-1;
+    }
+    else
+    {
+        left=left+1;
+    }
+    }   
+    return false;
+
+}
+bool istriplet(int arr[], int n, int x)
+{
+    for (int i = 0; i < n; i++) {
+        int low=i+1, high= n-1;
+        if (ispair(arr, n, x-arr[i]))
+        {
+            return true;
+        }
+    }
+    return false;
+
+}
+    
+int main() {
+    int m,y ;
+    cin >> m;
+    int arr1[m];
+    for (int i = 0; i < m; i++) {
+        cin >> arr1[i];
+    }
+    cin>> y;
+
+    bool index = istriplet(arr1, m,y);
+    cout << index;
+
+    return 0;
+}
