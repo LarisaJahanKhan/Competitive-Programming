@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+void merge(int a[], int low, int mid, int high) {
+    int n1 = mid - low + 1;
+    int n2 = high - mid;
+
+    int left[n1], right[n2];
+
+    for (int i = 0; i < n1; i++)
+        left[i] = a[low + i];
+    for (int j = 0; j < n2; j++)
+        right[j] = a[mid + 1 + j];
+
+    int i = 0, j = 0, k = low;
+
+    while (i < n1 && j < n2) {
+        if (left[i] <= right[j])
+            a[k++] = left[i++];
+        else
+            a[k++] = right[j++];
+    }
+
+    while (i < n1)
+        a[k++] = left[i++];
+    while (j < n2)
+        a[k++] = right[j++];
+}
+
+void mergeSort(int a[], int low, int high) {
+    if (low < high) {
+        int mid = (low + high) / 2;
+        mergeSort(a, low, mid);        // Sort left half
+        mergeSort(a, mid + 1, high);   // Sort right half
+        merge(a, low, mid, high);      // Merge the two halves
+    }
+}
+
+int main() {
+    int arr[] = {6, 3, 9, 5, 2};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    mergeSort(arr, 0, n - 1);
+
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+
+    return 0;
+}
