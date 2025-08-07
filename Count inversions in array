@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+int mergeAndCount (int a[],int left, int mid, int right)
+{
+  int count=0;
+  int n1= (mid-left)+1;
+  int n2= (right-mid);
+  int leftarr[n1]; int rightarr[n2];
+  for(int i=0; i<n1; i++)
+  {
+    leftarr[i]=a[left+i];
+  }
+  for(int i=0; i<n2; i++)
+  {
+    rightarr[i]=a[mid+1+i];
+  }
+  int i=0, j=0; int k=left;
+  while (i<n1 && j<n2)
+  {
+    if(leftarr[i]<=rightarr[j])
+    {
+      a[k++]= leftarr[i++];
+    }
+    else
+    {
+      a[k++]= rightarr[j++];
+      count = count +n1-i;
+    }
+  }
+  while(i<n1)
+  {
+    a[k++]= leftarr[i++];
+  }
+  while(j<n2)
+  {
+    a[k++]= rightarr[j++];
+  }
+  
+  return count;
+}
+
+
+int mergeSortAndCount (int a[], int left, int right)
+{
+  int count = 0;
+  if (left<right)
+  {
+    int mid=left+(right-left)/2;
+    count+= mergeSortAndCount(a, left, mid);
+    count+= mergeSortAndCount(a, mid+1,right);
+    count+= mergeAndCount (a, left, mid, right);
+  }
+  return count;
+}
+int main()
+{
+  int array[]={5,4,7,2,1};
+  int n= sizeof(array)/ sizeof(array[0]);
+  int result= mergeSortAndCount(array,0,n-1);
+  cout<< result;
+}
